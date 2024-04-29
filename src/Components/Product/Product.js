@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal } from "antd";
+import { Button,Modal,Image} from "antd";
 import TextArea from "antd/es/input/TextArea";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -50,6 +50,7 @@ const Product = () => {
     P_Form.append("offer", offer);
     P_Form.append("image", photo);
     P_Form.append("description", description);
+   
 
     const res = await fetch("http://localhost:5001/api/v1/product/", {
       method: "POST",
@@ -306,8 +307,10 @@ const DeleteProductById = async (id) => {
                 <>
                   <tr>
                     <td>
-                      <img
-                        className=" rounded-full h-10 w-10"
+                      <Image
+                       width={50}
+                       className=" rounded"
+                       
                         src={"http://localhost:5001/" + e.image}
                         alt=""
                       />

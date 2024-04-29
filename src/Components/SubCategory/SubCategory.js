@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CiImageOn } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
+import { Image } from 'antd';
 const SubCategory = () => {
   const [categorieId, setcategorieId] = useState();
   const [subCategorieName, setsubCategorieName] = useState();
@@ -12,6 +13,7 @@ const SubCategory = () => {
   const [subCategorieNameEdit, setsubCategorieNameEdit] = useState();
   const [idEdit , setidEdit] = useState();
   const [subImg ,setsubImg] = useState();
+  
   
   // subCategry Edite start API
 
@@ -236,8 +238,8 @@ const SubCategory = () => {
               return (
                 <tr>
                   <td>
-                    <img
-                      className=" w-10 h-10 rounded-full"
+                    <Image
+                      width={30}
                       src={"http://localhost:5001/" + e.img}
                       alt=""
                     />

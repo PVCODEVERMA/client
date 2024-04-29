@@ -17,6 +17,10 @@ import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
 import Forget from "./Components/Auth/Forget";
 import Addtocard from "./Components/AddtoCard/Addtocard";
+import AllProducts from "./Components/Allproject/AllProducts";
+import Details from "./Components/ProductDetails/Details";
+import ProductByDetails from "./Components/AddtoCard/ProductByDetails/ProductByDetails";
+
 
 function App() {
   return (
@@ -38,6 +42,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forget" element={<Forget />} />
         <Route path="/addtocard" element={<Addtocard />} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/allproducts" element={<AllProducts/>} />
+        <Route path="details" element={<Details/>} />
+        <Route path="productByDetails" element={<ProductByDetails/>} />
+        
+      
       </Routes>
     </>
   );

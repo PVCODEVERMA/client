@@ -18,6 +18,7 @@ const Home = () => {
     });
     const data = await res.json();
     setgetAllProduct(data);
+    
   };
 
   const [subcategory, setsubcategory] = useState([]);
@@ -38,6 +39,7 @@ const Home = () => {
     });
     const data = await res.json();
     setgetAllCotagry(data);
+    
   };
 
   useEffect(() => {
@@ -51,6 +53,7 @@ const Home = () => {
       <main className="w-[100%]  flex justify-center ">
         <div className=" w-[50%]">
           <div className=" flex flex-wrap w-full  h-16 mt-4 mb-3 gap-14 ">
+            
             {getAllCategry.map((e) => {
               return (
                 <>
@@ -97,7 +100,7 @@ const Home = () => {
       {/* Carousel start */}
       
 <div className="bg-[#F5F5DC] flex justify-center w-[100%]">
-  <div className=" w-[95%] mt-5 mb-5 ">
+  <div className=" w-[95%] mt-3 mb-3 ">
  
  <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
@@ -148,10 +151,10 @@ const Home = () => {
           return (
             <>
               <section className="">
-                <main className="  shadow-2xl mt-3 ml-10 mb-4">
-                  <div className="  bg-white text-gray-700 w-72 min-h-[8rem]  overflow-hidden flex justify-center">
+                <main className="  shadow-2xl mt-3 ml-3 mb-4">
+                  <div className="  bg-white text-gray-700 w-40 h-44 overflow-hidden flex justify-center">
                     <img
-                      className="w-72 h-72  overflow-hidden duration-1000 hover:scale-95 cursor-pointer"
+                      className="w-40 h-40  overflow-hidden duration-1000 hover:scale-95 cursor-pointer"
                       src={"http://localhost:5001/" + e.image} alt=""
                     />
                   </div>

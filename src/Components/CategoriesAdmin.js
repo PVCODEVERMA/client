@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Image } from 'antd';
+
 
 function CategoriesAdmin() {
   const [getAllCotagry, setgetAllCotagry] = useState([]);
@@ -220,11 +222,17 @@ function CategoriesAdmin() {
                 return (
                   <tr className=" text-center">
                     <td>
-                      <img
+                    <Image
+                       
+                      width={30}
+                        src={"http://localhost:5001/" + e.img}
+                         
+                       />
+                      {/* <img
                         className=" w-10 h-10 rounded-full"
                         src={"http://localhost:5001/" + e.img}
                         alt=""
-                      />
+                      /> */}
                     </td>
                     <td>{e.categorieName}</td>
                     <td className=" gap-7">

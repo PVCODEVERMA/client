@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Space } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { AiOutlineAlignRight } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
@@ -11,8 +11,11 @@ import { IoMdSearch } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { useCookies } from "react-cookie";
 import { IoSearch } from "react-icons/io5";
-
+import Addtocard from "../AddtoCard/Addtocard";
 function Navbar() {
+  
+ 
+
   const [isOpen, setIsOpen] = useState(false);
   const [cookie, removecookie] = useCookies(["user"]);
   var m = cookie["user"];
@@ -23,56 +26,79 @@ function Navbar() {
     window.location.reload();
   };
 
+  const [lodingcard, setlodingcard] = useState([]);
+  console.log("lent",lodingcard)
+  const lodingproductCartId = async () => {
+    const res = await fetch(
+      "http://localhost:5001/api/v1/AddCard/"+m._id,
+      {
+        method: "GET",
+        
+      }
+    );
+    const data = await res.json();
+    setlodingcard(data.data)
+    }
+
+    useEffect(() => {
+      lodingproductCartId();
+  
+    }, []);
   return (
     // Open right side bar start
     // Open right side bar  end
 
-    <div>
+  <div>
       {/* Navbar */}
-      <nav className="bg-[#387ADF] drop-shadow-lg grayscale-0">
-        <div className="container mx-auto p-2 flex  justify-between items-center">
-          <Link to="/" className="text-white font-bold text-xl cursor-pointer ">
+      <nav class="navbar navbar-expand-sm bg-primary">
+  <div class="container-fluid">
+  <Link to="/" className="text-white font-bold text-xl cursor-pointer ">
             Logo
           </Link>
+   
+    <div class=" flex gap-40">
+    <div class="flex items-center max-w-md mx-auto">
+  
 
-          <div className="w-[40%]">
-            <div class="input-group mb-1">
-              <input type="text" class="form-control" placeholder="Search" />
-              <button class="btn " type="submit">
-                <IoSearch />
-              </button>
-            </div>
-          </div>
-          <div className="md:hidden">
-            <button
-              className=" focus:outline-none"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <AiOutlineAlignRight />
-            </button>
-          </div>
+  <div class="flex items-center border rounded-md">
+    <input type="text" placeholder="Search" class="px-4 py-2 w-full rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-600" />
+    <button class="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+      Search
+    </button>
+  </div>
 
-          <div className=" flex   gap-3  ">
-            <div class="container ">
-              <div class="relative">
-                <div className="space-x-4">
-                  <ul className=" flex items-center gap-10">
-                    <li className="text-xl  text-white cursor-pointer">
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li className="text-xl  text-white cursor-pointer">
-                      <Link to="/admin">Admin</Link>
-                    </li>
-                    <li className="text-xl  text-white cursor-pointer">
-                      <Link to="/about">About</Link>
-                    </li>
-                    <ul className=" flex  gap-8">
+
+    </div>
+    
+      
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <Link to="/" class="nav-link active text-white cursor-pointer hover:bg-sky-700" aria-current="page" href="#">Home</Link>
+       
+        </li>
+        <li class="nav-item">
+          <Link to="/allproducts" class="nav-link active text-white cursor-pointer hover:bg-sky-700 " aria-current="page" href="#">All Products</Link>
+       
+        </li>
+        <li class="nav-item">
+          <Link  to="/admin" class="nav-link active text-white cursor-pointer hover:bg-sky-700" aria-current="page" href="#">Admin</Link>
+          
+        </li>
+        <li class="nav-item">
+          <Link to="/about" class="nav-link active text-white cursor-pointer hover:bg-sky-700" aria-current="page" href="#">Abouts</Link>
+        </li>
+        <li class="nav-item">
+          <Link to="" class="nav-link active text-white cursor-pointer hover:bg-sky-700" aria-current="page" href="#">Contact</Link>
+        </li>
+        <li class="nav-item">
+        <ul className=" flex  gap-8">
                 {!m && (
                   <Link
                     to="/login"
-                    className="text-xl text-white cursor-pointer"
+                    class="nav-link active text-white cursor-pointer"
                   >
                     LOGIN
+                    
                   </Link>
                 )}
                 {m && (
@@ -81,37 +107,24 @@ function Navbar() {
                   </Link>
                 )}
               </ul>
-
-                  </ul>
-
-
-                </div>
-              </div>
-            </div>
-            {/* <div>
-              <ul className=" flex  gap-8">
-                {!m && (
-                  <Link
-                    to="/login"
-                    className="text-xl text-white cursor-pointer"
-                  >
-                    LOGIN
-                  </Link>
-                )}
-                {m && (
-                  <Link onClick={handellogout} wrap size={14}>
-                    <Avatar size="large" icon={<UserOutlined />} />
-                  </Link>
-                )}
-              </ul>
-            </div> */}
-            <Link to="/addtocard" className="">
+        </li>
+        <li class="nav-item">
+        <Link to="/addtocard" className="">
+                   {/* {lodingcard.length} */}
               <AiOutlineShoppingCart className=" text-white h-9 w-9" />
             </Link>
-          </div>
-        </div>
-      </nav>
+        </li>
+        
 
+        
+        
+      
+      </ul>
+      
+    </div>
+  </div>
+      </nav>
+    
       {/* Mobile Menu */}
       <Transition
         show={isOpen}
